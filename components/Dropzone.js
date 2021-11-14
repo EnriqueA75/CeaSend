@@ -1,22 +1,25 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDropzone } from "react-dropzone";
 import clienteAxios from '../config/axios'
 
 const Dropzone = () => {
     
-    const onDrop = useCallback( async (acceptedFiles) => {
-        console.log(acceptedFiles)
+    const onDropAccepted = useCallback( async (acceptedFiles) => {
+
         const formData = new FormData()
-        formData.append('Archivo', acceptedFiles[0])
+        formData.append('Archivo no subible', acceptedFiles[0])
+
         const resultado = await clienteAxios.post('/api/archivos', formData)
-        console.log(resultado.data)
     })
+    const onDropRejected = () => {
+        console.log('si')
+    }
     const crearEnlace = () => {
         console.log('creando el enlace')
     }
 
     //extraer contenido del dropzone
-    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDrop})
+    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize: 5000000})
 
     const archivos = acceptedFiles.map(archivo => (
         <li key={archivo.lastModified} className="bg-white flex-1 p-3 mb-4 shadow-lg rounded">

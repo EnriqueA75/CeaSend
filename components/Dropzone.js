@@ -1,20 +1,16 @@
 import React, { useCallback, useContext } from 'react';
 import { useDropzone } from "react-dropzone";
-import clienteAxios from '../config/axios'
 import archivoContext from '../context/archivos/archivoContext'
 
 const Dropzone = () => {
     
     const ArchivoContext = useContext(archivoContext)
-    const { mostrarAlerta } = ArchivoContext
+    const { mostrarAlerta, subirArchivos, archivo, cargando } = ArchivoContext
 
     const onDropAccepted = useCallback( async (acceptedFiles) => {
-
         const formData = new FormData()
         formData.append('Archivo', acceptedFiles[0])
-
-        const resultado = await clienteAxios.post('/api/archivos', formData)
-        console.log(resultado.data)
+        subirArchivos(formData, acceptedFiles[0])
     })
 
     const onDropRejected = () => {
@@ -26,7 +22,7 @@ const Dropzone = () => {
     }
 
     //extraer contenido del dropzone
-    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize: 50})
+    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize: 5000000})
 
     const archivos = acceptedFiles.map(archivo => (
         <li key={archivo.lastModified} className="bg-white flex-1 p-3 mb-4 shadow-lg rounded">
@@ -43,11 +39,15 @@ const Dropzone = () => {
                 <ul>
                     {archivos}
                 </ul>
+                {cargando ? (
+                    <p className="my-10 text-center text-gray-600">Cargando arhivo</p>
+                ) : (
                 <button className="bg-blue-600 w-full py-3 rounded-lg text-white my-10  hover:bg-blue-800" type="button"
-                        onClick={() => crearEnlace()}
+                    onClick={() => crearEnlace()}
                 >
                     Crear Enlace
                 </button>
+                )}
             </div>
             ) : (
             <div {...getRootProps({className: 'dropzone w-full py-32'})}>

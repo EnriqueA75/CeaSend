@@ -75,9 +75,10 @@ const AuthState = ({children}) => {
                 payload: respuesta.data.usuario
             })
         } catch (error) {
+            console.log(error.response)
             dispatch({
                 type: INICIO_FALLIDO,
-                payload: error.response.data.msg
+                payload: 'error desde usuarioAutenticado'
             })    
         }
     }

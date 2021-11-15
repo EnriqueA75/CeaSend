@@ -1,14 +1,16 @@
 import React, { useReducer } from 'react';
 import archivoContext from './archivoContext'
 import archivoReducer from './archivoReducer'
-import { SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, CREAR_ENLACE_EXITO, CREAR_ENLACE_ERROR, MOSTRAR_ALERTA, OCULTAR_ALERTA } from '../../types';
+import { SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, CREAR_ENLACE_EXITO, CREAR_ENLACE_ERROR, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO } from '../../types';
 import clienteAxios from '../../config/axios';
-import tokenAuth from '../../config/tokenAuth';
 
 const ArchivoState = ({children}) => {
     //satate inicial
     const initialState = {
-       alerta: ''
+       alerta: '',
+       nombre: '',
+       nombre_original: '',
+       cargando: null
     }
     //definir el reducer
     const [state, dispatch] = useReducer(archivoReducer, initialState)
@@ -26,12 +28,38 @@ const ArchivoState = ({children}) => {
             })
         }, 4500)
     }
+
+    const subirArchivos = async (formData, acceptedFile) => {
+        dispatch({
+            type: SUBIR_ARCHIVO,
+        })
+        try {
+            const resultado = await clienteAxios.post('/api/archivos', formData)
+            console.log(resultado)
+            dispatch({
+                type: SUBIR_ARCHIVO_EXITO,
+                payload: {
+                    nombre: resultado.data.archivo,
+                    nombre_original: acceptedFile
+                }
+            })
+        } catch (error) {
+            dispatch({ 
+                type: SUBIR_ARCHIVO_ERROR,
+                payload: error.response.data.msg
+            })
+        }
+    }
    
     return ( 
         <archivoContext.Provider
             value={{
                 mostrarAlerta,
-                alerta: state.alerta
+                subirArchivos,
+                alerta: state.alerta,
+                nombre: state.nombre,
+                nombre_original: state.nombre_original,
+                cargando: state.cargando
             }}
         >
             {children}

@@ -1,10 +1,15 @@
 import React, {useContext, useEffect} from 'react';
 import Layout from '../components/Layout';
 import authContext from '../context/auth/authContext';
+import archivoContext from '../context/archivos/archivoContext';
 import Link from 'next/link';
 import Dropzone from '../components/Dropzone';
+import Alerta from '../components/Alerta';
 
 const Index = () => {
+
+  const ArchivoContext = useContext(archivoContext)
+  const { alerta } = ArchivoContext
 
   const AuthContext = useContext(authContext)
   const { usuarioAutenticado, usuario } = AuthContext
@@ -17,6 +22,7 @@ const Index = () => {
 
      <Layout>
        <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
+         {alerta && <Alerta/>}
          <div className="lg:flex md:shadow-lg p-5 bg-white rounded-lg py-10">
             <Dropzone/>
            <div className="md: flex-1 mb-3 mx-2 mt-16 lg:mt-0">

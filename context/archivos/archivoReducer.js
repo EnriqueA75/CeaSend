@@ -1,4 +1,4 @@
-import { MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO } from '../../types';
+import { MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO, CREAR_ENLACE_EXITO } from '../../types';
 
 export default (state, action) => {
     switch(action.type){
@@ -16,7 +16,7 @@ export default (state, action) => {
             return {
                 ...state,
                 nombre: action.payload.nombre,
-                nombre_original: action.payload.nombre_original,
+                nombre_original: action.payload.nombre_original.name,
                 cargado: null
             }
         case SUBIR_ARCHIVO_ERROR: 
@@ -29,6 +29,11 @@ export default (state, action) => {
             return {
                 ...state,
                 cargado: true
+            }
+        case CREAR_ENLACE_EXITO:
+            return {
+                ...state,
+                url: action.payload
             }
         default: 
             return state

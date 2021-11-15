@@ -5,7 +5,7 @@ import archivoContext from '../context/archivos/archivoContext'
 const Dropzone = () => {
     
     const ArchivoContext = useContext(archivoContext)
-    const { mostrarAlerta, subirArchivos, archivo, cargando } = ArchivoContext
+    const { mostrarAlerta, subirArchivos, archivo, cargando, crearEnlace } = ArchivoContext
 
     const onDropAccepted = useCallback( async (acceptedFiles) => {
         const formData = new FormData()
@@ -15,10 +15,6 @@ const Dropzone = () => {
 
     const onDropRejected = () => {
         mostrarAlerta('No se pudo subir el archivo')
-    }
-
-    const crearEnlace = () => {
-        console.log('creando el enlace')
     }
 
     //extraer contenido del dropzone

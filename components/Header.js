@@ -1,17 +1,33 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Link from 'next/link'
 import authContext from '../context/auth/authContext';
+import archivoContext from '../context/archivos/archivoContext';
+import { useRouter } from 'next/router'
 
 const Header = () => {
+
+    const router = useRouter()
 
     const AuthContext = useContext(authContext)
     const { usuarioAutenticado, usuario, cerrarSesion } = AuthContext
 
+    const ArchivoContext = useContext(archivoContext)
+    const { limpiarState } = ArchivoContext
+
+    useEffect(() => {
+        usuarioAutenticado()
+    }, [])
+
+    const redireccionar = () => {
+        router.push('/')
+        limpiarState()
+    }
+
     return ( 
         <header className="py-8 flex flex-col md:flex-row items-center justify-between">
-            <Link href={"/"}>
-                <p className="mb-8 text-2xl font-bold text-red-500	md:mb-0 ">CEASEND</p>
-            </Link>
+            <div>
+                <p  onClick={() => redireccionar()} className="mb-8 text-2xl font-bold text-red-500	md:mb-0 cursor-pointer">CEASEND</p>
+            </div>
             <div>
                 {usuario ? (
                 <div className="flex items-center">

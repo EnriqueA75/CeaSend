@@ -15,7 +15,10 @@ const Index = () => {
   const { usuarioAutenticado, usuario } = AuthContext
 
   useEffect(()=> {
-    usuarioAutenticado()
+    const token = localStorage.getItem('token')
+    if(token){
+      usuarioAutenticado()
+    }
   },[])
 
   return (

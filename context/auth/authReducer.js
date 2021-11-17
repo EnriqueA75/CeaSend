@@ -8,7 +8,8 @@ export default (state, action) => {
         case INICIO_FALLIDO:
             return {
                 ...state,
-                mensaje: action.payload
+                mensaje: action.payload,
+                autenticado: true
             }
         case LIMPIAR_ALERTA:
             return {
@@ -25,7 +26,8 @@ export default (state, action) => {
         case USUARIO_AUTENTICADO: 
             return {
                 ...state,
-                usuario: action.payload
+                usuario: action.payload,
+                autenticado: true
             }
         case CERRAR_SESION:
             localStorage.removeItem('token')

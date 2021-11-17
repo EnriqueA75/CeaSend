@@ -8,7 +8,7 @@ import Alerta from '../components/Alerta';
 const CrearCuenta = () => {
 
   const AuthContext = useContext(authContext)
-  const { registrarUsuario, mensaje } = AuthContext
+  const { registrarUsuario, mensaje, usuario } = AuthContext
 
   //Form y validación con Formik y YUP
   const formik = useFormik({

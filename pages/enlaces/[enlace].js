@@ -27,7 +27,7 @@ export async function getStaticPaths(){
     }
 }
 
-export default enlace = ({enlace}) => {
+const Enlace = ({enlace}) => {
 
     const ArchivoContext = useContext(archivoContext)
     const { mostrarAlerta, alerta } = ArchivoContext
@@ -95,3 +95,4 @@ export default enlace = ({enlace}) => {
         </Layout>
     );
 }
+export default Enlace

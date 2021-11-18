@@ -10,7 +10,6 @@ const Alerta = () => {
     const ArchivoContext = useContext(archivoContext)
     const { alerta } = ArchivoContext
 
-
     return ( 
         <div className={`bg-red-500 text-center py-2 px-3 w-full my-3 max-w-lg text-white mx-auto`}>
             {mensaje || alerta} 

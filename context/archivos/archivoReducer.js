@@ -1,4 +1,4 @@
-import { MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO, CREAR_ENLACE_EXITO, LIMPIAR_STATE } from '../../types';
+import { MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, SUBIR_ARCHIVO, CREAR_ENLACE_EXITO, LIMPIAR_STATE, AGREGAR_PASSWORD, AGREGAR_DESCARGAS  } from '../../types';
 
 export default (state, action) => {
     switch(action.type){
@@ -46,6 +46,16 @@ export default (state, action) => {
                 password: '',
                 autor: '',
                 url: ''
+            }
+        case AGREGAR_PASSWORD:
+            return {
+                ...state,
+                password: action.payload
+            }
+        case AGREGAR_DESCARGAS:
+            return {
+                ...state,
+                descargas: action.payload
             }
         default: 
             return state

@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import archivoContext from './archivoContext'
 import archivoReducer from './archivoReducer'
-import { SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, CREAR_ENLACE_EXITO, CREAR_ENLACE_ERROR, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, LIMPIAR_STATE } from '../../types';
+import { SUBIR_ARCHIVO_EXITO, SUBIR_ARCHIVO_ERROR, CREAR_ENLACE_EXITO, CREAR_ENLACE_ERROR, MOSTRAR_ALERTA, OCULTAR_ALERTA, SUBIR_ARCHIVO, LIMPIAR_STATE, AGREGAR_PASSWORD, AGREGAR_DESCARGAS } from '../../types';
 import clienteAxios from '../../config/axios';
 
 const ArchivoState = ({children}) => {
@@ -79,6 +79,19 @@ const ArchivoState = ({children}) => {
             type: LIMPIAR_STATE
         })
     }
+    //agregar el password 
+    const agregarPassword = (password) => {
+        dispatch({
+            type: AGREGAR_PASSWORD,
+            payload: password
+        })
+    }
+    const agregarDescargas = (descargas) => {
+        dispatch({
+            type: AGREGAR_DESCARGAS,
+            payload: descargas
+        })
+    }
    
     return ( 
         <archivoContext.Provider
@@ -86,7 +99,9 @@ const ArchivoState = ({children}) => {
                 mostrarAlerta,
                 subirArchivos,
                 crearEnlace,
-                limpiarState,
+                limpiarState,                
+                agregarPassword,
+                agregarDescargas,
                 alerta: state.alerta,
                 nombre: state.nombre,
                 nombre_original: state.nombre_original,

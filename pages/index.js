@@ -43,7 +43,7 @@ const Index = () => {
            <div className="md: flex-1 mb-3 mx-2 mt-16 lg:mt-0">
            <h2 className="text-4xl font-sans font-bold text-gray-700 my-4"> Comparte archivos de forma sencilla y privada</h2>
            <p className=" text-lg leading-loose font-bold text-gray-700">
-             <span className="text-red-500 font-bold">Ceasend React</span> te permite compartir archivos con cifrado extremo a extremo y el archivo será eliminado despues de ser descargado, de esta forma lo que commpartes será privado y tus cosas no permanecerán en línea
+             <span className="text-red-500 font-bold">Ceasend</span> te permite compartir archivos con cifrado extremo a extremo y el archivo será eliminado despues de ser descargado, de esta forma lo que commpartes será privado y tus cosas no permanecerán en línea
            </p>
            <Link href="/crearcuenta">
              <a className="text-red-500 font-bold text-lg hover:text-red-700">Crea una cuenta para más beneficios</a>
